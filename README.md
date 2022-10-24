@@ -32,19 +32,23 @@ ___
 ```
     public void OnPointerEnter(PointerEventData eventdata)
     {
+        // 슬롯 정보 가져오기
         ClickManager.GetInstance.slot = gameObject;
     }
 
     public void OnPointerExit(PointerEventData eventdata)
     {
+        // 슬롯 정보 초기화
         ClickManager.GetInstance.slot = null;
     }
-    
-    public void OnPointerDown(PointerEventData _eventData)
+```
+```
+ public void OnPointerDown(PointerEventData _eventData)
+ {
+    if(ClickManager.GetInstance.clickItem == null)
     {
-        if(ClickManager.GetInstance.clickItem == null)
-        {
-            ClickManager.GetInstance.clickItem = gameObject;
-        }
+        // 아이템의 정보를 가져온다.
+        ClickManager.GetInstance.clickItem = gameObject; 
     }
+ }
 ```
