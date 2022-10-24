@@ -179,3 +179,41 @@ ___
 ___
 
 ### 아이템 제작
+* 아이템의 레시피를 리스트에 등록합니다.
+```
+        recipe i_axerecipe = new recipe();
+        i_axerecipe.output = Item.ItemType.i_axe;
+        i_axerecipe.Recipe = new Item.ItemType[SIZE, SIZE];
+        i_axerecipe.Recipe[0, 0] = Item.ItemType.iron_ingot;    i_axerecipe.Recipe[0, 1] = Item.ItemType.iron_ingot;    i_axerecipe.Recipe[0, 2] = Item.ItemType.none;
+        i_axerecipe.Recipe[1, 0] = Item.ItemType.iron_ingot;    i_axerecipe.Recipe[1, 1] = Item.ItemType.stick;         i_axerecipe.Recipe[1, 2] = Item.ItemType.none;
+        i_axerecipe.Recipe[2, 0] = Item.ItemType.none;          i_axerecipe.Recipe[2, 1] = Item.ItemType.stick;         i_axerecipe.Recipe[2, 2] = Item.ItemType.none;
+                                                                        .
+                                                                        .   
+                                                                        .
+```
+* CRAFT SLOT에 있는 아이템을 매니저에 등록합니다
+```
+    // 크래프팅 3x3 슬롯에 아이템이 들어가거나 빠진 경우 슬롯 자리에 맞는 배열 자리에 아이템을 추가
+    // 3x3 제작 배열
+    private Transform[,] slotArray;
+    public void CheckItem()
+    {
+        for(int i = 0; i < CraftManager.SIZE; ++i)
+        {
+            for(int j = 0; j < CraftManager.SIZE; ++j)
+            {
+                // 슬롯 안에 아이템이 있다면...
+                if (slotArray[i, j].childCount > 0 && slotArray[i, j].GetChild(0).gameObject.activeSelf)
+                {
+                    // 아이템 클래스를 제작 매니저에 등록
+                    Item item = slotArray[i, j].GetChild(0).GetComponent<Item>();
+                    if(item && item.count > 0) CraftManager.GetInstance.setItem(item, i, j);
+                }
+                // 아이템 삭제
+                else CraftManager.GetInstance.DeleteItem(i, j);
+            }
+        }
+        // 제작대에서 나올 아이템을 체크한다.
+        OutputCheck();
+    }
+```
