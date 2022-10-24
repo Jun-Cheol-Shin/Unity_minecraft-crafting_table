@@ -17,6 +17,7 @@
 ___
 
 ### 아이템 슬롯
+![tempsnip](https://user-images.githubusercontent.com/77636255/197442301-f188d6ae-b611-425a-85fb-50a0fc33c88a.png)
 * 3종류의 아이템 슬롯을 ENUM으로 제작해 변수로 갖도록 함
 * DROP = 인벤토리, CRAFT = 제작대, OUTPUT = 제작해서 나오는 아이템 슬롯
 ```
