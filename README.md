@@ -17,12 +17,13 @@
 ___
 
 ### 아이템 슬롯
-* 아이템 슬롯에는 3종류가 있습니다.(DROP = 인벤토리, CRAFT = 제작대, OUTPUT = 제작해서 나오는 아이템 슬롯)
-``
+* 3종류의 아이템 슬롯을 ENUM으로 제작해 따로 처리
+* DROP = 인벤토리, CRAFT = 제작대, OUTPUT = 제작해서 나오는 아이템 슬롯
+```
     public enum SlotType
     {
         DROP =  1,
         CRAFT = 2,
         OUTPUT = 3
     };
-``
+```
