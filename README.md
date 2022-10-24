@@ -182,7 +182,7 @@ ___
 * 여러 아이템의 레시피(3x3 Item 배열로 보관)를 List에 등록합니다.
 * CRAFT SLOT에 있는 아이템을 매니저에 등록합니다
 * OUTPUT에서 나올 수 있는 아이템을 찾은 후 OUTPUT SLOT에 생성합니다.
-* UnityEvent로 등록해 아이템 이동(마우스 클릭)을 할 때마다 제작대 탐색을 하도록 구현했습니다. (필요시 Invoke함수 발동)
+* UnityEvent로 등록해 아이템 이동(Input.GetMouseButtonDown)을 할 때마다 두 함수가 작동되도록 구현했습니다. (Invoke함수 발동)
 ![123](https://user-images.githubusercontent.com/77636255/197447164-67c5a7df-c4df-49f2-9a92-2bc83445bae5.PNG)
 ```
     // 크래프팅 3x3 슬롯에 아이템이 들어가거나 빠진 경우 슬롯 자리에 맞는 배열 자리에 아이템을 추가
@@ -240,3 +240,45 @@ ___
         }
     }
 ```
+___
+
+### 전체적인 코드 흐름
+* 하나의 통괄 매니저를 만들어 모든 코드를 관리하도록 함 (싱글톤 활용)
+* UI의 배열 설정 -> 인벤토리 아이템 생성 -> 모든 아이템 레시피 리스트 등록 -> 업데이트 문 작동(마우스 클릭 후 아이템 이동 및 제작대 탐색)
+```
+public class Manager : Singleton<Manager>
+{
+    // 통괄 매니저 모든 함수들
+    private void Awake()
+    {
+        CraftingUI.GetInstance.CraftSlotInit();
+        InventoryUI.GetInstance.InventorySlotInit();
+    }
+
+    void Start()
+    {
+        InventoryUI.GetInstance.AddItem(80, Item.ItemType.iron_ingot);
+        InventoryUI.GetInstance.AddItem(5,  Item.ItemType.carrot);
+        InventoryUI.GetInstance.AddItem(10, Item.ItemType.redstone);
+        InventoryUI.GetInstance.AddItem(20, Item.ItemType.paper);
+        InventoryUI.GetInstance.AddItem(5,  Item.ItemType.web);
+        InventoryUI.GetInstance.AddItem(30, Item.ItemType.wood);
+        InventoryUI.GetInstance.AddItem(50, Item.ItemType.gold_ingot);
+        InventoryUI.GetInstance.AddItem(50, Item.ItemType.diamond_gem);
+        InventoryUI.GetInstance.AddItem(50, Item.ItemType.diamond_gem);
+        InventoryUI.GetInstance.AddItem(50, Item.ItemType.diamond_gem);
+        InventoryUI.GetInstance.AddItem(50, Item.ItemType.diamond_gem);
+        InventoryUI.GetInstance.AddItem(50, Item.ItemType.diamond_gem);
+
+
+        CraftManager.GetInstance.recipeInit();
+        ClickManager.GetInstance.CanvasInit();
+    }
+
+    private void Update()
+    {
+        ClickManager.GetInstance.ClickFunc();
+    }
+}
+```
+___
