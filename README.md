@@ -206,7 +206,8 @@ ___
         // 제작대에서 나올 아이템을 체크한다.
         OutputCheck();
     }
-    
+```
+```
     public void OutputCheck()
     {
         // OUTPUT 슬롯에 나올 아이템을 정해준다.
