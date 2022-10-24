@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CraftManager : MonoBehaviour
+public class CraftManager : Singleton<CraftManager>
 {
     [HideInInspector]
     public const int SIZE = 3;
@@ -17,11 +17,6 @@ public class CraftManager : MonoBehaviour
 
 
     private List<recipe> recipeList = new List<recipe>();
-
-    private void Start()
-    {
-        recipeInit();
-    }
 
     private bool isEmpty(int x,int y)
     {
@@ -79,7 +74,7 @@ public class CraftManager : MonoBehaviour
         }
     }
 
-    void recipeInit()
+    public void recipeInit()
     {
         recipe i_axerecipe = new recipe();
         i_axerecipe.output = Item.ItemType.i_axe;
@@ -185,37 +180,37 @@ public class CraftManager : MonoBehaviour
         recipeList.Add(i_hoerecipe);
         recipeList.Add(i_shovelrecipe);
     }
+
+    bool CheckRecipe(int index)
+    {
+        for (int i = 0; i < SIZE; i++)
+        {
+            for (int j = 0; j < SIZE; j++)
+            {
+                if (recipeList[index].Recipe[i, j] != Item.ItemType.none &&
+                    (isEmpty(i, j) || getItem(i, j).type != recipeList[index].Recipe[i, j]))
+                {
+                    return false;
+                }
+
+                else if (recipeList[index].Recipe[i, j] == Item.ItemType.none && !isEmpty(i, j))
+                {
+                    return false;
+                }
+
+            }
+        }
+
+        return true;
+    }
+
     public Item.ItemType GetRecipeOutput()
     {
-        bool flag;
-        for(int index = 0; index < recipeList.Count; index++)
+        for (int index = 0; index < recipeList.Count; index++)
         {
-            flag = false;
-            for(int i = 0; i < SIZE; i++)
-            {
-                for(int j = 0; j < SIZE; j++)
-                {
-                    if(recipeList[index].Recipe[i, j] != Item.ItemType.none)
-                    {
-                        if(isEmpty(i, j) || getItem(i, j).type != recipeList[index].Recipe[i, j])
-                        {
-                            flag = true;
-                        }
-                    }
-                    else
-                    {
-                        if(!isEmpty(i,j))
-                            flag = true;
-                    }
-                    if(flag)
-                        break;
-                }
-                if(flag)
-                    break;
-            }
-            if(!flag)
-                return recipeList[index].output;
+            if(CheckRecipe(index)) return recipeList[index].output;
         }
+
         return Item.ItemType.none;
     }
 }

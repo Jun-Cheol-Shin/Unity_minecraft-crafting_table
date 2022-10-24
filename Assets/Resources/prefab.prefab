@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4396872320943184426}
   - component: {fileID: 4396872320943184424}
   - component: {fileID: 4396872320943184427}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: count
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 4396872322219173285}
   - component: {fileID: 2567381826824526832}
   - component: {fileID: 7069707800054463060}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,7 +154,7 @@ GameObject:
   - component: {fileID: 4396872322856427363}
   - component: {fileID: 4396872322856427361}
   - component: {fileID: 4396872322856427360}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}

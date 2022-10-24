@@ -3,17 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DropSlot : MonoBehaviour,IPointerEnterHandler
+public class DropSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-
-    private ClickManager clickmanager;
-    private void Start()
+    
+    public enum SlotType
     {
-        clickmanager = GameObject.Find("Management").transform.Find("ClickManager").GetComponent<ClickManager>();
-    }
+        DROP =  1,
+        CRAFT = 2,
+        OUTPUT = 3
+    };
+
+
+    public SlotType slotType = SlotType.DROP;
 
     public void OnPointerEnter(PointerEventData eventdata)
     {
-        clickmanager.slot = gameObject;
+        ClickManager.GetInstance.slot = gameObject;
+    }
+
+    public void OnPointerExit(PointerEventData eventdata)
+    {
+        ClickManager.GetInstance.slot = null;
     }
 }

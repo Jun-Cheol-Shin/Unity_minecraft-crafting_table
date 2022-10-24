@@ -63,16 +63,16 @@ public class Item : MonoBehaviour
     public ItemType type;
 
 
-    public void ItemSetting(ItemManager item_manager, int _count, ItemType _type)
+    public void ItemSetting(int _count, ItemType _type)
     {
         count = _count;
         type = _type;
         bool flag = false;
-        for(int i = 0; i < item_manager.itemAssets.Count; i++)
+        for(int i = 0; i < ItemManager.GetInstance.itemAssets.Count; i++)
         {
-            if(type.ToString() == item_manager.itemAssets[i].name)
+            if(type.ToString() == ItemManager.GetInstance.itemAssets[i].name)
             {
-                itemicon = item_manager.itemAssets[i];
+                itemicon = ItemManager.GetInstance.itemAssets[i];
                 transform.GetChild(0).GetComponent<Image>().sprite = itemicon;
                 flag = true;
             }
