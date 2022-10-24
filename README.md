@@ -251,12 +251,14 @@ public class Manager : Singleton<Manager>
     // 통괄 매니저 모든 함수들
     private void Awake()
     {
+        // UI의 슬롯들을 클래스의 변수 배열에 저장
         CraftingUI.GetInstance.CraftSlotInit();
         InventoryUI.GetInstance.InventorySlotInit();
     }
 
     void Start()
     {
+        // 아이템 생성
         InventoryUI.GetInstance.AddItem(80, Item.ItemType.iron_ingot);
         InventoryUI.GetInstance.AddItem(5,  Item.ItemType.carrot);
         InventoryUI.GetInstance.AddItem(10, Item.ItemType.redstone);
@@ -270,14 +272,14 @@ public class Manager : Singleton<Manager>
         InventoryUI.GetInstance.AddItem(50, Item.ItemType.diamond_gem);
         InventoryUI.GetInstance.AddItem(50, Item.ItemType.diamond_gem);
 
-
+        // 레시피 생성, 캔버스 변수 저장
         CraftManager.GetInstance.recipeInit();
         ClickManager.GetInstance.CanvasInit();
     }
 
     private void Update()
     {
-        ClickManager.GetInstance.ClickFunc();
+        ClickManager.GetInstance.ClickFunc();     // 마우스 클릭 이벤트
     }
 }
 ```
