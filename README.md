@@ -17,7 +17,7 @@
 ___
 
 ### 아이템 슬롯
-* 3종류의 아이템 슬롯을 ENUM으로 제작해 따로 처리
+* 3종류의 아이템 슬롯을 ENUM으로 제작해 변수로 갖도록 함
 * DROP = 인벤토리, CRAFT = 제작대, OUTPUT = 제작해서 나오는 아이템 슬롯
 ```
     public enum SlotType
@@ -26,4 +26,25 @@ ___
         CRAFT = 2,
         OUTPUT = 3
     };
+    public SlotType slotType = SlotType.DROP;
+```
+* 유니티 마우스 터치, 클릭 이벤트를 이용해 slot과 아이템의 정보를 가져도록 함
+```
+    public void OnPointerEnter(PointerEventData eventdata)
+    {
+        ClickManager.GetInstance.slot = gameObject;
+    }
+
+    public void OnPointerExit(PointerEventData eventdata)
+    {
+        ClickManager.GetInstance.slot = null;
+    }
+    
+    public void OnPointerDown(PointerEventData _eventData)
+    {
+        if(ClickManager.GetInstance.clickItem == null)
+        {
+            ClickManager.GetInstance.clickItem = gameObject;
+        }
+    }
 ```
