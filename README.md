@@ -57,10 +57,9 @@ ___
 
 ### 마우스 좌클릭
 ![ezgif com-gif-maker](https://user-images.githubusercontent.com/77636255/197443535-166bb1ab-2d0d-480c-ad85-19c18d57e358.gif)
-* 아이템 옮기기, 합치기 등의 기능을 만들었습니다.
 * 커서에 아이템이 없는 경우 rectTransform 변수를 저장해 아이템을 끌고 다닐 수 있도록 합니다.
 ```
-// 커서에 아이템을 들고 있지 않은 경우...
+    // 커서에 아이템을 들고 있지 않은 경우...
     if (slot && clickItem && !cursorOnItem)
     {
         cursorOnItem = true;
@@ -72,7 +71,19 @@ ___
         DropSlot SlotType = slot.GetComponent<DropSlot>();
         if (SlotType && SlotType.slotType == DropSlot.SlotType.OUTPUT) onCraftEvent.Invoke();
     }
+                                        .
+                                        .
+                                        .
+                                        
+    // 아이템이 커서를 따라가도록 Update문에서 실행되는 코드
+    if(cursorOnItem && clickItem && rectTransform)
+    {
+        rectTransform.anchoredPosition =
+            new Vector2((Input.mousePosition.x - canvas.transform.position.x) + CURSOR_ITEM_DISTANCE,
+            (Input.mousePosition.y - canvas.transform.position.y) - CURSOR_ITEM_DISTANCE);
+    }
 ```
+![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/77636255/197445094-cb383842-2b4b-4c4e-bbc7-4a6c73733dc0.gif)
 * 커서에 아이템이 있는 경우에는 분기점이 많이 나뉩니다.
 * 슬롯이 비었거나 슬롯이 아닌 곳에 둔다면 간단하게 비어있는 슬롯의 자식으로 넣어서 해결했습니다.
 * 밑 코드는 슬롯 안에 아이템이 있을 경우, 같은 타입의 아이템이거나 혹은 완전히 다른 아이템일 경우의 코드입니다.
