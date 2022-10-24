@@ -25,7 +25,9 @@ public class CraftManager : Singleton<CraftManager>
 
     public Item getItem(int x,int y)
     {
-        return Array[x, y];
+        if(Array[x, y]) return Array[x, y];
+
+        return null;
     }
 
     public void setItem(Item item, int x,int y)
@@ -33,24 +35,34 @@ public class CraftManager : Singleton<CraftManager>
         Array[x, y] = item;
     }
 
-    public void itemcountUp(int x,int y)
+    public void itemcountUp(int x, int y)
     {
-        getItem(x, y).count++;
-        getItem(x, y).resetcounting();
+        Item item = getItem(x, y);
+        if (item)
+        {
+            item.count++;
+            item.resetcounting();
+        }
     }
 
-    public void itemcountDown(int x,int y)
+    public void itemcountDown(int x, int y)
     {
-        getItem(x, y).count--;
-        getItem(x, y).resetcounting();
+        Item item = getItem(x, y);
+        if (item)
+        {
+            item.count--;
+            if (item.count < 0)
+            {
+                item.count = 0;
+                DeleteItem(x, y);
+            }
+            item.resetcounting();
+        }
     }
 
     public void DeleteItem(int x, int y)
     {
-        if(Array[x, y] != null)
-        {
-            setItem(null, x, y);
-        }
+        Array[x, y] = null;
     }
 
     public bool AddItem(Item item, int x, int y)

@@ -9,7 +9,8 @@ public class ClickandDrop : MonoBehaviour, IPointerDownHandler
     {
         if(ClickManager.GetInstance.clickItem == null)
         {
-            ClickManager.GetInstance.clickItem = gameObject;
+            // 아이템의 정보를 가져온다.
+            ClickManager.GetInstance.clickItem = gameObject; 
         }
     }
 

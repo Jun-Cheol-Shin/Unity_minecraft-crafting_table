@@ -1605,6 +1605,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7207e911639d024b96658cfae32df85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onClickEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1162542622}
+        m_MethodName: CheckItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onCraftEvent:
     m_PersistentCalls:
       m_Calls:
@@ -1621,7 +1635,7 @@ MonoBehaviour:
         m_CallState: 2
   slot: {fileID: 0}
   clickItem: {fileID: 0}
-  click: 0
+  cursorOnItem: 0
   canvas: {fileID: 219446847}
 --- !u!1 &729300821
 GameObject:

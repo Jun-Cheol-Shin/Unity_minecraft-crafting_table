@@ -35,7 +35,6 @@ public class Manager : Singleton<Manager>
     private void Update()
     {
         ClickManager.GetInstance.ClickFunc();
-        CraftingUI.GetInstance.CheckItem();
     }
 
 }
