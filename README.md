@@ -84,7 +84,7 @@ ___
     }
 ```
 ![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/77636255/197445094-cb383842-2b4b-4c4e-bbc7-4a6c73733dc0.gif)
-* 커서에 아이템이 있는 경우에는 분기점이 많이 나뉩니다.
+* 커서에 아이템이 있는 경우에는 분기점이 나뉩니다.
 * 슬롯이 비었거나 슬롯이 아닌 곳에 둔다면 간단하게 비어있는 슬롯의 자식으로 넣어서 해결했습니다.
 * 밑 코드는 슬롯 안에 아이템이 있을 경우, 같은 타입의 아이템이거나 혹은 완전히 다른 아이템일 경우의 코드입니다.
 ```
@@ -142,3 +142,40 @@ ___
         return;
     }
 ```
+___
+
+### 마우스 우클릭
+![ezgif com-gif-maker (3)](https://user-images.githubusercontent.com/77636255/197445989-c472b991-422d-4faa-b851-a75dfb47ec84.gif)
+* 우클릭에는 아이템을 나누는 기능이 있습니다.
+```
+        // 아이템을 나눠야 하는 경우...
+        if (SlotType && SlotType.slotType != DropSlot.SlotType.OUTPUT && OutputItem && OutputItem.count > 1)
+        {
+            // 커서 쪽에 아이템을 새로 만든다.
+            GameObject temp = Instantiate(clickItem);
+            temp.name = temp.GetComponent<Item>().type.ToString();
+            temp.transform.SetParent(slot.transform);
+            temp.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 0, 0);
+
+            Item Slotitem = temp.GetComponent<Item>();
+
+            // 슬롯과 커서쪽 아이템의 개수를 정해준다.
+            if (Slotitem.count % 2 == 0)
+            {
+                Slotitem.count = OutputItem.count / 2;
+                OutputItem.count = Slotitem.count;
+            }
+            else
+            {
+                Slotitem.count = OutputItem.count / 2 + 1;
+                OutputItem.count = Slotitem.count - 1;
+            }
+
+            // UI쪽 text 설정
+            Slotitem.resetcounting();
+            OutputItem.resetcounting();
+        }
+```
+___
+
+### 아이템 제작
