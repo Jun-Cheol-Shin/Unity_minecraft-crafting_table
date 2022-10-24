@@ -179,19 +179,9 @@ ___
 ___
 
 ### 아이템 제작
-* 아이템의 레시피를 리스트에 등록합니다.
-```
-        recipe i_axerecipe = new recipe();
-        i_axerecipe.output = Item.ItemType.i_axe;
-        i_axerecipe.Recipe = new Item.ItemType[SIZE, SIZE];
-        i_axerecipe.Recipe[0, 0] = Item.ItemType.iron_ingot;    i_axerecipe.Recipe[0, 1] = Item.ItemType.iron_ingot;    i_axerecipe.Recipe[0, 2] = Item.ItemType.none;
-        i_axerecipe.Recipe[1, 0] = Item.ItemType.iron_ingot;    i_axerecipe.Recipe[1, 1] = Item.ItemType.stick;         i_axerecipe.Recipe[1, 2] = Item.ItemType.none;
-        i_axerecipe.Recipe[2, 0] = Item.ItemType.none;          i_axerecipe.Recipe[2, 1] = Item.ItemType.stick;         i_axerecipe.Recipe[2, 2] = Item.ItemType.none;
-                                                                        .
-                                                                        .   
-                                                                        .
-```
+* 여러 아이템의 레시피(3x3 Item 배열로 보관)를 List에 등록합니다.
 * CRAFT SLOT에 있는 아이템을 매니저에 등록합니다
+* OUTPUT에서 나올 수 있는 아이템을 찾은 후 OUTPUT SLOT에 생성합니다.
 ```
     // 크래프팅 3x3 슬롯에 아이템이 들어가거나 빠진 경우 슬롯 자리에 맞는 배열 자리에 아이템을 추가
     // 3x3 제작 배열
@@ -215,5 +205,35 @@ ___
         }
         // 제작대에서 나올 아이템을 체크한다.
         OutputCheck();
+    }
+    
+    public void OutputCheck()
+    {
+        // OUTPUT 슬롯에 나올 아이템을 정해준다.
+        outputType = CraftManager.GetInstance.GetRecipeOutput();
+        // OUTPUT 슬롯에 나올 아이템이 없다면 함수 탈출
+        if (outputType == Item.ItemType.none)
+        {
+            if (outputSlot.childCount > 0) Destroy(outputSlot.GetChild(0).gameObject);
+            return;
+        }
+
+        int count = GetItemCount(outputType);
+
+        // 아웃풋 슬롯에 이미 아이템이 있다면.. 타입이 다르면 삭제 후 생성
+        if (outputSlot.childCount > 0)
+        {
+            Item slotItem = outputSlot.GetChild(0).gameObject.GetComponent<Item>();
+            if(slotItem && slotItem.type != outputType)
+            {
+                Destroy(outputSlot.GetChild(0).gameObject);
+                CreateItem(count);
+            }
+        }
+        // 슬롯에 아이템이 없다면...
+        else if(outputSlot.childCount == 0)
+        {
+            CreateItem(count);
+        }
     }
 ```
