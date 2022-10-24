@@ -1,5 +1,6 @@
 #                 #### 마인크래프트 제작대 ####
 ![캡처화면2](https://user-images.githubusercontent.com/77636255/115140267-720aef80-a071-11eb-984f-d29fa7cadb50.PNG)
+## [동영상 링크](https://youtu.be/rtxeAgXOxJo)
 # 목차
 * [소개](#소개)
 * [구현 내용](#구현-내용)
@@ -7,8 +8,6 @@
 ## 소개
 * Unity 3D 2018 4.14 Ver.
 * 2022/10/24 마우스 버그 수정
-
-## [동영상 링크](#https://youtu.be/rtxeAgXOxJo)
 
 ## 구현 내용
 * [아이템 슬롯](#아이템-슬롯)
