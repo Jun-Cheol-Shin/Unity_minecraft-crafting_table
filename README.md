@@ -180,7 +180,16 @@ ___
 ___
 
 ### 아이템 제작
-* 여러 아이템의 레시피(3x3 Item 배열로 보관)를 List에 등록합니다.
+```
+        // 쇠 도끼 레시피
+        recipe i_axerecipe = new recipe();
+        i_axerecipe.output = Item.ItemType.i_axe;
+        i_axerecipe.Recipe = new Item.ItemType[SIZE, SIZE];
+        i_axerecipe.Recipe[0, 0] = Item.ItemType.iron_ingot;    i_axerecipe.Recipe[0, 1] = Item.ItemType.iron_ingot;    i_axerecipe.Recipe[0, 2] = Item.ItemType.none;
+        i_axerecipe.Recipe[1, 0] = Item.ItemType.iron_ingot;    i_axerecipe.Recipe[1, 1] = Item.ItemType.stick;         i_axerecipe.Recipe[1, 2] = Item.ItemType.none;
+        i_axerecipe.Recipe[2, 0] = Item.ItemType.none;          i_axerecipe.Recipe[2, 1] = Item.ItemType.stick;         i_axerecipe.Recipe[2, 2] = Item.ItemType.none;
+```
+* 여러 아이템의 레시피를 List에 저장합니다.
 * CRAFT SLOT에 있는 아이템을 매니저에 등록합니다 이후 매니저에서 3x3배열로 아이템을 저장해 확인하도록 합니다.
 * OUTPUT에서 나올 수 있는 아이템을 찾은 후 OUTPUT SLOT에 아이템을 생성합니다.
 * UnityEvent로 등록해 아이템 이동(마우스 버튼 클릭 이벤트)을 할 때마다 두 함수가 작동되도록 구현했습니다. (Invoke함수 발동)
